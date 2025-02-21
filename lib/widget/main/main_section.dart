@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_state_app/screens/home_screen.dart';
 import 'package:real_state_app/widget/main/home_bannar.dart';
 import 'package:real_state_app/widget/main/icon_info.dart';
-import 'package:real_state_app/widget/main/porject.dart';
+import 'package:real_state_app/widget/main/porject_info.dart';
 
 class MainSection extends StatelessWidget {
   const MainSection({super.key});
@@ -10,14 +10,20 @@ class MainSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeScreen(
-        mainSection: SingleChildScrollView(
-      child: Column(
-        children: [
-          HomeBannar(),
-          IconInfo(),
-          Porjects(),
-        ],
+      mainSection: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeBanner(),
+            SizedBox(height: 20), // مسافة بين الأقسام
+            IconInfo(),
+            SizedBox(height: 20),
+            ProjectsInfo(),
+            SizedBox(height: 20),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

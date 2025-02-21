@@ -26,52 +26,57 @@ class SideMenuSection extends StatelessWidget {
                     Divider(),
                     Goles(),
                     Divider(),
-                    SizedBox(
-                      height: kDefaultPadding / 2,
-                    ),
+                    SizedBox(height: kDefaultPadding / 2),
                     TextButton(
                       onPressed: () {},
                       child: FittedBox(
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             SvgPicture.asset("assets/icons/download.svg"),
-                            SizedBox(
-                              width: kDefaultPadding / 2,
-                            ),
-                            Text("Download Push hear")
+                            SizedBox(width: kDefaultPadding / 2),
+                            Text("Download Push hear"),
                           ],
                         ),
                       ),
                     ),
+                    SizedBox(height: kDefaultPadding),
                     Container(
                       margin: EdgeInsets.only(top: kDefaultPadding / 2),
+                      padding:
+                          EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
                       color: kSecondaryColor,
-                      child: Row(
-                        children: [
-                          Spacer(),
-                          IconButton(
-                              onPressed: () {},
-                              icon: SvgPicture.asset(
-                                  "assets/icons/linkedin.svg")),
-                          Spacer(),
-                          IconButton(
-                              onPressed: () {},
-                              icon:
-                                  SvgPicture.asset("assets/icons/github.svg")),
-                          Spacer(),
-                          IconButton(
-                              onPressed: () {},
-                              icon:
-                                  SvgPicture.asset("assets/icons/twitter.svg")),
-                          Spacer(),
-                          IconButton(
-                              onPressed: () {},
-                              icon:
-                                  SvgPicture.asset("assets/icons/dribble.svg")),
-                          Spacer(),
-                        ],
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: kDefaultPadding,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(
+                                    "assets/icons/linkedin.svg"),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon:
+                                    SvgPicture.asset("assets/icons/github.svg"),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(
+                                    "assets/icons/twitter.svg"),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(
+                                    "assets/icons/dribble.svg"),
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
