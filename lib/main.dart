@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:real_state_app/screens/home_screen.dart';
 import 'package:real_state_app/utils/constans.dart';
 import 'package:real_state_app/widget/main/main_section.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding
+      .ensureInitialized(); // يضمن تهيئة النظام قبل تشغيل التطبيق
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Real Estate",
       theme: ThemeData.dark().copyWith(
         primaryColor: kPrimaryColor,
@@ -22,12 +24,11 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white)
             .copyWith(
-              bodyLarge:
-                  TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
-              bodyMedium: TextStyle(color: kBodyTextColor),
+              bodyLarge: const TextStyle(color: Colors.white),
+              bodyMedium: const TextStyle(color: kBodyTextColor),
             ),
       ),
-      home: MainSection(),
+      home: const MainSection(),
     );
   }
 }

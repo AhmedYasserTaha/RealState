@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:real_state_app/responsive_screen.dart';
+import 'package:real_state_app/utils/constans.dart';
 import 'package:real_state_app/widget/menu/side_menu_section.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,6 +11,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: ResponsiveScreen.isDesktop(context)
+          ? null
+          : AppBar(
+              backgroundColor: kBgColor,
+              leading: Builder(
+                builder: (context) => IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: Icon(
+                    Icons.menu,
+                  ),
+                ),
+              )),
+      drawer: SideMenuSection(),
       body: SafeArea(
         child: Center(
           child: Container(
@@ -16,9 +33,16 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: SideMenuSection(),
+                if (ResponsiveScreen.isDesktop(context))
+                  Expanded(
+                    flex: 2,
+                    child: SideMenuSection(),
+                  ),
+                SizedBox(
+                  width: kDefaultFontSize,
+                ),
+                SizedBox(
+                  width: kDefaultFontSize,
                 ),
                 Expanded(flex: 7, child: mainSection),
               ],

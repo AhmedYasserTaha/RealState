@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_state_app/model/project.dart';
+import 'package:real_state_app/responsive_screen.dart';
 import 'package:real_state_app/utils/constans.dart';
+import 'package:real_state_app/widget/main/project_cart.dart';
 
 class ProjectsInfo extends StatelessWidget {
   const ProjectsInfo({super.key});
@@ -28,76 +30,61 @@ class ProjectsInfo extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           SizedBox(height: 10),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: demoProjects.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount:
-                  crossAxisCount, // عدد الأعمدة بناءً على حجم الشاشة
-              crossAxisSpacing: kDefaultPadding,
-              mainAxisSpacing: kDefaultPadding,
-              childAspectRatio: 0.9,
-            ),
-            itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.all(kDefaultPadding),
-              decoration: BoxDecoration(
-                color: kSecondaryColor,
-                borderRadius: BorderRadius.circular(10),
+          ResponsiveScreen(
+            desktop: bulidGradeVeiw(
+              itemCount: demoProjects.length,
+              crossAxisCount: 3,
+              childAspectRatio: 0.75,
+              itemBuilder: (context, index) => ProjectCart(
+                project: demoProjects[index],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        demoProjects[index].image!,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: kDefaultPadding / 2),
-                  Text(
-                    demoProjects[index].title!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                  ),
-                  SizedBox(height: kDefaultPadding / 2),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      demoProjects[index].description!,
-                      style: TextStyle(height: 1.5, color: Colors.white70),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  SizedBox(height: kDefaultPadding / 2),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "More info >",
-                          style: TextStyle(color: kPrimaryColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            ),
+            taplet: bulidGradeVeiw(
+              itemCount: demoProjects.length,
+              crossAxisCount: MediaQuery.of(context).size.width < 900 ? 3 : 2,
+              childAspectRatio: 0.75,
+              itemBuilder: (context, index) => ProjectCart(
+                project: demoProjects[index],
+              ),
+            ),
+            mobileLarge: bulidGradeVeiw(
+              itemCount: demoProjects.length,
+              crossAxisCount: 2,
+              childAspectRatio: 0.75,
+              itemBuilder: (context, index) => ProjectCart(
+                project: demoProjects[index],
+              ),
+            ),
+            mobile: bulidGradeVeiw(
+              itemCount: demoProjects.length,
+              crossAxisCount: 1,
+              childAspectRatio: 0.75,
+              itemBuilder: (context, index) => ProjectCart(
+                project: demoProjects[index],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  GridView bulidGradeVeiw({
+    required int itemCount,
+    required int crossAxisCount,
+    required double childAspectRatio,
+    required IndexedWidgetBuilder itemBuilder,
+  }) {
+    return GridView.builder(
+      shrinkWrap: true,
+      itemCount: itemCount,
+      // physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount, // عدد الأعمدة بناءً على حجم الشاشة
+          crossAxisSpacing: kDefaultPadding,
+          mainAxisSpacing: kDefaultPadding,
+          childAspectRatio: childAspectRatio),
+      itemBuilder: itemBuilder,
     );
   }
 }

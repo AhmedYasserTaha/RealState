@@ -42,6 +42,7 @@ class SideMenuSection extends StatelessWidget {
                     ),
                     SizedBox(height: kDefaultPadding),
                     Container(
+                      alignment: Alignment.center,
                       margin: EdgeInsets.only(top: kDefaultPadding / 2),
                       padding:
                           EdgeInsets.symmetric(vertical: kDefaultPadding / 2),

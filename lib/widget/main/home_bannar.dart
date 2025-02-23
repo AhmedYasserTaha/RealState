@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_state_app/responsive_screen.dart';
 import 'package:real_state_app/utils/constans.dart';
 
 class HomeBanner extends StatelessWidget {
@@ -9,7 +10,7 @@ class HomeBanner extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return AspectRatio(
-          aspectRatio: 1.7,
+          aspectRatio: ResponsiveScreen.isMobile(context) ? 1 : 1.7,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -29,16 +30,22 @@ class HomeBanner extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        "Build a great future \n for all of us!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          "Build a great future \n for all of us!",
+                          style: ResponsiveScreen.isDesktop(context)
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .headlineLarge!
+                                  .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)
+                              : Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
                     ),
                     SizedBox(height: kDefaultPadding),
                     ElevatedButton(
