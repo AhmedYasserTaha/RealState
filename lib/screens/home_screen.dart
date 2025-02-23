@@ -17,36 +17,39 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: kBgColor,
               leading: Builder(
                 builder: (context) => IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  icon: Icon(
-                    Icons.menu,
-                  ),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: const Icon(Icons.menu),
                 ),
-              )),
-      drawer: SideMenuSection(),
-      body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: BoxConstraints(minWidth: 1440.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (ResponsiveScreen.isDesktop(context))
-                  Expanded(
-                    flex: 2,
-                    child: SideMenuSection(),
-                  ),
-                SizedBox(
-                  width: kDefaultFontSize,
-                ),
-                SizedBox(
-                  width: kDefaultFontSize,
-                ),
-                Expanded(flex: 7, child: mainSection),
-              ],
+              ),
             ),
+      drawer: const SideMenuSection(),
+      body: SafeArea(
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: ResponsiveScreen.isDesktop(context)
+                ? 1440.0
+                : MediaQuery.of(context).size.width,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (ResponsiveScreen.isDesktop(context))
+                const Expanded(
+                  flex: 2,
+                  child: SideMenuSection(),
+                ),
+              const SizedBox(width: kDefaultFontSize * 2),
+              Expanded(
+                flex: 7,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(kDefaultFontSize),
+                    child: mainSection,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
